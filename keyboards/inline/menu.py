@@ -1,37 +1,67 @@
 from aiogram.types import InlineKeyboardButton,InlineKeyboardMarkup
 
+
+mainmenu = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text="Bugungi namoz vaqtlari ⏳",callback_data='myviloyat')
+        ],
+        [
+            InlineKeyboardButton(text="Viloyatlar",callback_data='other'),
+            InlineKeyboardButton(text="Update Viloyat 🔄",callback_data='update'),
+        ],
+        [
+
+            InlineKeyboardButton(text="Qur'on va Nashidalar 🕌",url='https://t.me/Quran_nasheedsbot'),
+
+        ]
+    ]
+)
 menu = InlineKeyboardMarkup(
     inline_keyboard=[
         [
-            InlineKeyboardButton(text="Toshkent",callback_data="region_1"),
-            InlineKeyboardButton(text="Andijon",callback_data="region_2")
+            InlineKeyboardButton(text="Toshkent",callback_data="Toshkent"),
+            InlineKeyboardButton(text="Andijon",callback_data="Andijon")
         ],
         [
-            InlineKeyboardButton(text="Farg'ona",callback_data="fargona"),
-            InlineKeyboardButton(text="Samarqand", callback_data="samarqand")
+            InlineKeyboardButton(text="Farg'ona",callback_data="Fargona"),
+            InlineKeyboardButton(text="Samarqand", callback_data="Samarqand")
         ],
         [
-            InlineKeyboardButton(text="Buxoro", callback_data="buxoro"),
-            InlineKeyboardButton(text="Sirdaryo", callback_data="sirdaryo")
+            InlineKeyboardButton(text="Buxoro", callback_data="Buxoro"),
+            InlineKeyboardButton(text="Sirdaryo", callback_data="Sirdaryo")
         ],
         [
-            InlineKeyboardButton(text="Jizzax", callback_data="jizzax"),
-            InlineKeyboardButton(text="Zarafshon", callback_data="zarafshon")
+            InlineKeyboardButton(text="Jizzax", callback_data="Jizzax"),
+            InlineKeyboardButton(text="Zarafshon", callback_data="Zarafshon")
         ],
         [
-            InlineKeyboardButton(text="Qarshi", callback_data="qarshi"),
-            InlineKeyboardButton(text="Navoiy", callback_data="navoiy")
+            InlineKeyboardButton(text="Qarshi", callback_data="Qarshi"),
+            InlineKeyboardButton(text="Navoiy", callback_data="Navoiy")
         ],
         [
-            InlineKeyboardButton(text="Namangan", callback_data="namangan"),
-            InlineKeyboardButton(text="Nukus", callback_data="nukus")
+            InlineKeyboardButton(text="Namangan", callback_data="Namangan"),
+            InlineKeyboardButton(text="Nukus", callback_data="Nukus")
         ],
         [
-            InlineKeyboardButton(text="Termiz", callback_data="termiz"),
-            InlineKeyboardButton(text="Urganch", callback_data="urganch")
+            InlineKeyboardButton(text="Termiz", callback_data="Termiz"),
+            InlineKeyboardButton(text="Urganch", callback_data="Urganch")
         ],
         [
-            InlineKeyboardButton(text="Xiva", callback_data="xiva")
+            InlineKeyboardButton(text="Xiva", callback_data="Xiva"),
+            InlineKeyboardButton(text="Margilan",callback_data="Margilon")
+
+        ],
+        [
+            InlineKeyboardButton(text="⬆️ Menu",callback_data='asosiy')
+        ]
+    ]
+)
+
+asosiy = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text="⬆️ Menu",callback_data='asosiy')
         ]
     ]
 )

@@ -29,3 +29,6 @@ class Video(StatesGroup):
     button_habar = State()
     button_url = State()
     tasdiqlash = State()
+
+class Start(StatesGroup):
+    viloyat = State()

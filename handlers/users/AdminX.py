@@ -1,15 +1,18 @@
-from aiogram import types
+
 from aiogram.dispatcher import FSMContext
 from aiogram.utils.exceptions import BotBlocked
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ContentType, CallbackQuery
-from aiogram.types import ReplyKeyboardMarkup , KeyboardButton
 
 from keyboards.inline.tas_bek import sendphoto, sendtxt, sendvideo
 from states.holatlar import *
 from keyboards.default.main_button import *
 from loader import dp, bot, base
 from utils.db_api.baza import *
-from keyboards.default.main_button import SendMS_panel
+from keyboards.default.main_button import Send_users
+
+@dp.message_handler(text="👤 Foydalanuvchilarga xabar yuborish")
+async def bot_echo(message: types.Message):
+    await message.answer(text="👤 Foydalanuvchilarga xabar yuborish",reply_markup=Send_users)
 @dp.message_handler(text="RASM Xabar 📝")
 async def bot_echo(message: types.Message):
     await message.answer(text="RASM JONATING")
@@ -34,7 +37,7 @@ async def bot_echo(message: types.message,state:FSMContext):
 async def bot_echo(message: types.Message, state: FSMContext):
     text = message.text
     await state.update_data({"text": text})
-    await message.answer(text="SSILKA KIRITNG\n\nMasalan: <i>https://t.me/MistrUz</i> ")
+    await message.answer(text="SSILKA KIRITNG\n\nMasalan: <i>https://t.me/UmarDeveloper</i> ")
     await SendPhoto.button_url.set()
 
 @dp.message_handler(state=SendPhoto.button_url)
@@ -53,7 +56,7 @@ async def bot_echo(message: types.Message, state: FSMContext):
     ekranga_chiqarish =  f"<b>{matn}</b>"
 
     inline_tugma = InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text=text, url=silka)]])
-    await bot.send_photo(chat_id="1625900856",photo=rasm, caption=ekranga_chiqarish,reply_markup=inline_tugma)
+    await bot.send_photo(chat_id="917782961",photo=rasm, caption=ekranga_chiqarish,reply_markup=inline_tugma)
     try:
         await message.answer("Reklama postingiz to'g'ri bo'lsa Tasdiqlashni bosin aks holda Bekor qilish",reply_markup=sendphoto)
     except Exception:
@@ -81,7 +84,7 @@ async def bot_echo(message: CallbackQuery, state: FSMContext):
             all_users += 1
         except BotBlocked:
             blocked_users += 1
-    await bot.send_message(chat_id=user_id, text=f"<b>{all_users} ta foidalanuvchilarga reklama yuborildi ✅\n\n{blocked_users} ta odam botni bloklagan</b>", reply_markup=SendMS_panel)
+    await bot.send_message(chat_id=user_id, text=f"<b>{all_users} ta foidalanuvchilarga reklama yuborildi ✅\n\n{blocked_users} ta odam botni bloklagan</b>", reply_markup=Send_users)
     await state.finish()
 
     userlar= base.select_all_foidalanuvchilar()
@@ -98,7 +101,7 @@ async def bot_echo(message: CallbackQuery, state: FSMContext):
 async def bot_echo(message: CallbackQuery, state: FSMContext):
     txt = message.message.text
     user_id = message.from_user.id
-    await bot.send_message(chat_id=user_id,text="Bekor qilindi ❌",reply_markup=SendMS_panel)
+    await bot.send_message(chat_id=user_id,text="Bekor qilindi ❌",reply_markup=Send_users)
     await state.finish()
 
 
@@ -122,7 +125,7 @@ async def bot_echo(message: types.Message, state: FSMContext):
 
     ekranga_chiqarish =  f"💬<b>Murojat :</b> {xabri}\n"
 
-    await bot.send_message(chat_id="917782961",text=ekranga_chiqarish,reply_markup=sendtxt)
+    await bot.send_message(chat_id=f"{message.from_user.id}",text=ekranga_chiqarish,reply_markup=sendtxt)
     await SendM.tasdiq.set()
 
 
@@ -142,7 +145,7 @@ async def bot_echo(message: CallbackQuery, state: FSMContext):
             all_users += 1
         except BotBlocked:
             blocked_users += 1
-    await bot.send_message(chat_id=user_id, text=f"<b>{all_users} ta foidalanuvchilarga reklama yuborildi ✅\n\n{blocked_users} ta odam botni bloklagan</b>", reply_markup=SendMS_panel)
+    await bot.send_message(chat_id=user_id, text=f"<b>{all_users} ta foidalanuvchilarga reklama yuborildi ✅\n\n{blocked_users} ta odam botni bloklagan</b>", reply_markup=Send_users)
     await state.finish()
 
     userlar= base.select_all_foidalanuvchilar()
@@ -159,7 +162,7 @@ async def bot_echo(message: CallbackQuery, state: FSMContext):
 @dp.callback_query_handler(state=SendM,text="bekortxt")
 async def bot_echo(message: CallbackQuery, state: FSMContext):
     user_id = message.from_user.id
-    await bot.send_message(chat_id=user_id,text="Bekor qilindi ❌",reply_markup=SendMS_panel)
+    await bot.send_message(chat_id=user_id,text="Bekor qilindi ❌",reply_markup=Send_users)
     await state.finish()
 
 # photo
@@ -234,7 +237,7 @@ async def bot_echo(message: CallbackQuery, state: FSMContext):
             all_users += 1
         except BotBlocked:
             blocked_users += 1
-    await bot.send_message(chat_id=user_id, text=f"<b>{all_users} ta foidalanuvchilarga reklama yuborildi ✅\n\n{blocked_users} ta odam botni bloklagan</b>", reply_markup=SendMS_panel)
+    await bot.send_message(chat_id=user_id, text=f"<b>{all_users} ta foidalanuvchilarga reklama yuborildi ✅\n\n{blocked_users} ta odam botni bloklagan</b>", reply_markup=Send_users)
     await state.finish()
 
     userlar= base.select_all_foidalanuvchilar()
@@ -246,12 +249,12 @@ async def bot_echo(message: CallbackQuery, state: FSMContext):
             await bot.send_video(chat_id=user_id, video=video, caption=ekranga_chiqarish, reply_markup=inline_tugma)
         except Exception:
             pass
-
+    await state.finish()
 @dp.callback_query_handler(state=SendPhoto.tasdiqlash,text="bekorv")
 async def bot_echo(message: CallbackQuery, state: FSMContext):
     txt = message.message.text
     user_id = message.from_user.id
-    await bot.send_message(chat_id=user_id,text="Bekor qilindi ❌",reply_markup=SendMS_panel)
+    await bot.send_message(chat_id=user_id,text="Bekor qilindi ❌",reply_markup=Send_users)
     await state.finish()
 
 
