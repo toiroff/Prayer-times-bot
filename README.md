@@ -1,2 +1,2 @@
 # Namoz Vaqtlari Bot
- Namoz vaqtlarini bepul yuklab beruvchi bot API siz va auto
+Telegram bot for prayer times for all regions of Uzbekistan
